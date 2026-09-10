@@ -1,0 +1,7 @@
+node_modules/
+dist/
+lib/**/*.map
+*.log
+.DS_Store
+.idea/
+.vscode/

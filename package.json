@@ -1,0 +1,116 @@
+{
+  "name": "cordis-plugin-graph",
+  "version": "0.2.0",
+  "description": "DSH/Cordis Web plugin: a zoomable relation graph of every loaded plugin - dependencies, resolved providers, and Loader-tree nesting - as a Settings tab next to 'Plugin list'.",
+  "keywords": [
+    "acryl-package",
+    "dsh-plugin",
+    "dsh-plugins",
+    "cordis",
+    "cordis-plugin",
+    "acryl",
+    "deepseek-harness",
+    "plugin-graph",
+    "settings-tab"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acryldev/cordis-plugin-graph.git"
+  },
+  "homepage": "https://github.com/acryldev/cordis-plugin-graph#readme",
+  "bugs": {
+    "url": "https://github.com/acryldev/cordis-plugin-graph/issues"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale"
+      ],
+      "platform": "web"
+    }
+  },
+  "acryl": {
+    "schemaVersion": 1,
+    "artifacts": {
+      "plugins": [
+        "./lib/index.js"
+      ]
+    },
+    "runtime": "cordis",
+    "compatibility": {
+      "node": "^22.19.0 || >=24.0.0",
+      "hosts": {
+        "@deepseek-ai/cordis": "4.0.1"
+      }
+    },
+    "capabilities": [
+      "ui:settings-tab",
+      "introspection:cordis-graph",
+      "introspection:tool-flow",
+      "host-route:state"
+    ]
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "scripts": {
+    "build": "node scripts/clean.mjs && tsdown && tsc -p tsconfig.json && tsc -p tsconfig.client.json --emitDeclarationOnly",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.client.json --noEmit && tsc -p tsconfig.tests.json --noEmit",
+    "test": "vitest run",
+    "check": "pnpm run build && pnpm run typecheck && pnpm run test"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "4.0.1",
+    "@deepseek-ai/cordis-plugin-loader": "1.0.3",
+    "@deepseek-ai/dsh-client-locale": "0.1.5-alpha.1",
+    "@deepseek-ai/dsh-client-ui-renderer": "0.1.5-alpha.1",
+    "@deepseek-ai/dsh-client-ui-settings": "0.1.5-alpha.1",
+    "@deepseek-ai/dsh-client-ui-slots": "0.1.5-alpha.1",
+    "@deepseek-ai/dsh-host-webserver": "0.1.5-alpha.1",
+    "@deepseek-ai/dsh-tools": "0.1.5-alpha.1",
+    "@types/cytoscape": "3.31.0",
+    "@types/node": "^22.20.0",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "cytoscape": "3.34.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tsdown": "0.22.2",
+    "typescript": "6.0.3",
+    "vitest": "4.1.8"
+  },
+  "files": [
+    "lib/*.js",
+    "lib/*.d.ts",
+    "lib/types/**/*.d.ts",
+    "cordis.patch.yml",
+    "install/**",
+    "LICENSE",
+    "README.md"
+  ]
+}

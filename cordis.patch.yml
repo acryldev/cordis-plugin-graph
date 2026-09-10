@@ -1,0 +1,14 @@
+# cordis-plugin-graph bundle patch.
+#
+# When installed through the DSH plugin CLI:
+#
+#   dsh plugin --profile <name> add cordis-plugin-graph@<version>
+#
+# the command appends `cordis-plugin-graph` to `dsh.profile.bundles`, and the
+# profile boot merges THIS patch (one `insert` of the host-half row) exactly
+# like a manual cordis.patch.yml mount line. The browser half ships through
+# `exports["./client"]` and is discovered from the row's package name.
+
+- insert:
+    - id: cordis-plugin-graph
+      name: 'cordis-plugin-graph'
